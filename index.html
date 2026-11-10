@@ -14,11 +14,6 @@
 <meta property="og:description" content="Kjønstadmarka 4 er nærmarka til over 300 barn i Levanger. Vi arbeider for at området skal vernes mot utbygging.">
 <meta property="og:image" content="https://vernkjonstadmarka.no/images/kjonstadmarka-sti.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -43,8 +38,8 @@
     [style*="max-width:1200px"] { padding-left: 14px !important; padding-right: 14px !important; }
   }
 </style>
-</helmet>
-
+</head>
+<body>
 <div style="background:#f6f4ee; color:#23261f; font-family:'Public Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; line-height:1.55; overflow-x:hidden;">
 
   <!-- NAV -->
@@ -68,15 +63,13 @@
   <span id="top"></span>
 
   <!-- STATUS BANNER -->
-  <sc-if value="{{ showStatusBanner }}" hint-placeholder-val="{{ true }}">
-    <div style="background:#1f3a2b; color:#e9ecdf;">
-      <div style="max-width:1200px; margin:0 auto; padding:12px 32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; font-size:14px;">
-        <span style="background:#b5623a; color:#fff; font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px;">Aktuelt nå</span>
-        <span style="flex:1; min-width:240px;">Saken skal opp til sluttbehandling: plan- og utviklingsutvalget <strong style="color:#fff;">9. desember</strong> og kommunestyret <strong style="color:#fff;">16. desember 2026</strong></span>
-        <a href="#aktuelt" style="color:#fff; font-weight:600; text-decoration:underline; text-underline-offset:3px;">Les mer →</a>
-      </div>
+  <div style="background:#1f3a2b; color:#e9ecdf;">
+    <div style="max-width:1200px; margin:0 auto; padding:12px 32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; font-size:14px;">
+      <span style="background:#b5623a; color:#fff; font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px;">Aktuelt nå</span>
+      <span style="flex:1; min-width:240px;">Saken skal opp til sluttbehandling: plan- og utviklingsutvalget <strong style="color:#fff;">9. desember</strong> og kommunestyret <strong style="color:#fff;">16. desember 2026</strong></span>
+      <a href="#aktuelt" style="color:#fff; font-weight:600; text-decoration:underline; text-underline-offset:3px;">Les mer →</a>
     </div>
-  </sc-if>
+  </div>
 
   <!-- SISTE NYTT: oppdateres automatisk av daglig nyhetsjobb. Nyeste øverst i listen. -->
   <section id="siste-nytt" style="max-width:1200px; margin:0 auto; padding:28px 32px 0;">
@@ -581,11 +574,10 @@
         <p style="font-size:15px; color:#9db892; margin:0 0 22px; max-width:32em;">Vi bruker appen <strong style="color:#e2e6d8;">Spond</strong> for å organisere aktiviteter og dele informasjon. Les vedtektene under før du melder deg inn, uansett hvilken måte du velger.</p>
 
         <div style="background:#24422e; border:1px solid #37483080; border-radius:14px; padding:20px 22px; margin:0 0 24px; max-width:34em;">
-          <button onClick="{{ toggleVedtekter }}" style="background:none; border:none; padding:0; cursor:pointer; display:flex; align-items:center; gap:8px; color:#e2e6d8; font-size:15px; font-weight:600; font-family:inherit;">
-            <span style="display:inline-block; transition:transform 0.2s;{{ vedtekterArrowStyle }}">▸</span> Les vedtektene før du melder deg inn
+          <button onclick="toggleVedtekter()" style="background:none; border:none; padding:0; cursor:pointer; display:flex; align-items:center; gap:8px; color:#e2e6d8; font-size:15px; font-weight:600; font-family:inherit;">
+            <span id="vedtekter-arrow" style="display:inline-block; transition:transform 0.2s;">▸</span> Les vedtektene før du melder deg inn
           </button>
-          <sc-if value="{{ vedtekterOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:16px; max-height:280px; overflow-y:auto; background:#1c2b20; border-radius:10px; padding:18px 20px; font-size:13.5px; line-height:1.65; color:#c3c9b7;">
+            <div id="vedtekter-content" style="display:none; margin-top:16px; max-height:280px; overflow-y:auto; background:#1c2b20; border-radius:10px; padding:18px 20px; font-size:13.5px; line-height:1.65; color:#c3c9b7;">
               <p style="margin:0 0 12px; font-weight:700; color:#e9ecdf;">Vedtekter for Vern Kjønstadmarka — vedtatt 28.06.2026</p>
               <p style="margin:0 0 10px;"><strong style="color:#e2e6d8;">§ 1 Formål</strong><br>Vern Kjønstadmarkas formål er på frivillig basis å arbeide for å verne hele Kjønstadmarka 4 — både hensynssonen og områdene som er avsatt til boliger og veger mv.</p>
               <p style="margin:0 0 10px;"><strong style="color:#e2e6d8;">§ 2 Årsmøtet</strong><br>Årsmøtet er Vern Kjønstadmarkas øverste organ og holdes hvert år innen utgangen av april med 14 dagers varsel. Alle med betalt kontingent og som opptrer i samsvar med § 5 har stemmerett. Styret legger fram årsberetning og revidert regnskap. Leder, styremedlemmer og varamedlemmer velges for to år (ved det første styret: halvparten for to år, resten for ett år, slik at vervene rulleres). Vedtektsendringer krever 2/3 flertall og må fremsettes en måned før årsmøtet.</p>
@@ -595,9 +587,8 @@
               <p style="margin:0 0 10px;"><strong style="color:#e2e6d8;">§ 6 Gaver</strong><br>Pengegaver settes på rentebærende bankkonto og brukes kun i samsvar med formålet.</p>
               <p style="margin:0;"><strong style="color:#e2e6d8;">§ 7 Oppløsning</strong><br>Skjer ved et særskilt sammenkalt møte, innkalt med minst en måneds varsel, og krever 2/3 flertall av de fremmøtte. Oppløsningsmøtet bestemmer disponeringen av gjenværende midler, som forutsettes brukt til friluftsliv i Kjønstadmarka.</p>
             </div>
-          </sc-if>
           <label style="display:flex; align-items:flex-start; gap:10px; margin-top:16px; font-size:14px; color:#c3c9b7; cursor:pointer;">
-            <input type="checkbox" checked="{{ vedtekterAccepted }}" onChange="{{ toggleAccepted }}" style="margin-top:3px; width:16px; height:16px; accent-color:#9db892; flex:0 0 auto;">
+            <input type="checkbox" id="vedtekter-checkbox" onchange="toggleAccepted()" style="margin-top:3px; width:16px; height:16px; accent-color:#9db892; flex:0 0 auto;">
             <span>Jeg har lest og godtar vedtektene for Vern Kjønstadmarka</span>
           </label>
         </div>
@@ -610,13 +601,11 @@
           <div style="background:#24422e; border:1px solid #37483080; border-radius:14px; padding:20px 22px; display:flex; flex-direction:column; align-items:flex-start;">
             <div style="font-size:13px; color:#9db892; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">Via Spond</div>
             <p style="font-size:14.5px; color:#c3c9b7; margin:0 0 14px; line-height:1.55;">Gratis app. Du melder deg inn og får informasjon om saken og aktiviteter. Tar under ett minutt.</p>
-            <a href="https://spond.com/invite/CXRLH" target="_blank" rel="noopener" onClick="{{ onJoinClick }}" style="background:#f6f4ee; color:#1f3a2b; text-decoration:none; padding:13px 24px; border-radius:999px; font-weight:700; font-size:15.5px; margin-top:auto;{{ joinButtonStyle }}">Meld deg inn via Spond</a>
+            <a href="https://spond.com/invite/CXRLH" target="_blank" rel="noopener" id="spond-join-btn" onclick="onJoinClick(event)" style="background:#f6f4ee; color:#1f3a2b; text-decoration:none; padding:13px 24px; border-radius:999px; font-weight:700; font-size:15.5px; margin-top:auto; opacity:0.55;">Meld deg inn via Spond</a>
           </div>
         </div>
         <p style="font-size:14.5px; color:#9db892; margin:22px 0 10px; max-width:32em;">Passer ingen av delene? <a href="mailto:vern.kjonstadmarka@proton.me?subject=Innmelding%20i%20Vern%20Kj%C3%B8nstadmarka&body=Fornavn%3A%0AEtternavn%3A%0ATelefonnummer%3A%0AAdresse%3A%0AE-post%3A" style="color:#e2e6d8; font-weight:600; text-decoration:underline;">Send oss en e-post</a> med navn, telefonnummer, adresse og e-post — vi melder deg inn manuelt.</p>
-        <sc-if value="{{ showAcceptHint }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:13.5px; color:#e2b48f; margin:10px 0 0;">Kryss av at du har lest vedtektene før du melder deg inn.</p>
-        </sc-if>
+        <p id="accept-hint" style="display:none; font-size:13.5px; color:#e2b48f; margin:10px 0 0;">Kryss av at du har lest vedtektene før du melder deg inn.</p>
       </div>
       <div style="background:#24422e; border:1px solid #37483080; border-radius:16px; padding:28px;">
         <div style="font-size:13px; color:#9db892; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Hva medlemskapet gir</div>
@@ -638,12 +627,10 @@
         <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(30px,3.6vw,46px); line-height:1.08; margin:0 0 18px; color:#1c2b20;">Foreningen og styret</h2>
         <p style="font-size:16.5px; color:#43463c; margin:0 0 20px;">Vi het tidligere «Interessegruppa for bevaring av skogen i Kjønstadmarka». 28. juni 2026 ble gruppen stiftet som forening under navnet <strong>Vern Kjønstadmarka</strong>, med vedtekter og styre. Det gir oss en formell organisasjonsform — Foreningen er registrert i Enhetsregisteret i Brønnøysund med org.nr. 938 111 669, ta imot gaver og søke tilskudd — og dermed stå sterkere i saken.</p>
         <p style="font-size:16.5px; color:#43463c; margin:0 0 26px;">Vil du melde deg inn, hjelpe til eller vite mer om saken? Send oss en e-post, så tar vi det derfra.</p>
-        <sc-if value="{{ showContactDetails }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex; flex-direction:column; gap:6px;">
-            <a href="mailto:vern.kjonstadmarka@proton.me" style="color:#1f3a2b; font-weight:600; font-size:18px; text-decoration:none;">vern.kjonstadmarka@proton.me</a>
-            <span style="font-size:14.5px; color:#6b6d61;">Vern Kjønstadmarka · styret</span>
-          </div>
-        </sc-if>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <a href="mailto:vern.kjonstadmarka@proton.me" style="color:#1f3a2b; font-weight:600; font-size:18px; text-decoration:none;">vern.kjonstadmarka@proton.me</a>
+          <span style="font-size:14.5px; color:#6b6d61;">Vern Kjønstadmarka · styret</span>
+        </div>
       </div>
       <div style="background:#fff; border:1px solid #e6e1d4; border-radius:16px; padding:30px;">
         <div style="font-size:13px; color:#6b6d61; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;">Styret</div>
@@ -698,53 +685,49 @@
   </footer>
 
 </div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{
-  &quot;showStatusBanner&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Innhold&quot; },
-  &quot;showContactDetails&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Innhold&quot; }
-}">
-class Component extends DCLogic {
-  state = { vedtekterOpen: false, vedtekterAccepted: false, showAcceptHint: false };
-  componentDidMount() {
-    // Bildene som rullerer i hero. Legg til flere filnavn her etter hvert som barnas
-    // representant laster opp bilder (samme filer kan brukes på Barnas side).
-    const photos = [
+<script>
+  // Hero-bilder som rullerer. Legg til flere filnavn her etter hvert som barnas
+  // representant laster opp bilder (samme filer kan brukes på Barnas side).
+  (function () {
+    var photos = [
       "images/kjonstadmarka-sti.jpg",
       "images/barn-paa-sti.jpg"
     ];
-    const el = document.getElementById("heroPhoto");
+    var el = document.getElementById("heroPhoto");
     if (!el || photos.length < 2) return;
-    let i = 0;
-    this._heroTimer = setInterval(() => {
+    var i = 0;
+    setInterval(function () {
       i = (i + 1) % photos.length;
       el.style.opacity = "0";
-      setTimeout(() => { el.src = photos[i]; el.style.opacity = "1"; }, 800);
+      setTimeout(function () { el.src = photos[i]; el.style.opacity = "1"; }, 800);
     }, 10000);
+  })();
+
+  function toggleVedtekter() {
+    var content = document.getElementById("vedtekter-content");
+    var arrow = document.getElementById("vedtekter-arrow");
+    var isOpen = content.style.display !== "none";
+    content.style.display = isOpen ? "none" : "block";
+    arrow.style.transform = isOpen ? "" : "rotate(90deg)";
   }
-  componentWillUnmount() {
-    if (this._heroTimer) clearInterval(this._heroTimer);
+
+  function toggleAccepted() {
+    var checkbox = document.getElementById("vedtekter-checkbox");
+    var btn = document.getElementById("spond-join-btn");
+    var hint = document.getElementById("accept-hint");
+    btn.style.opacity = checkbox.checked ? "1" : "0.55";
+    hint.style.display = "none";
   }
-  renderVals() {
-    const accepted = this.state.vedtekterAccepted;
-    return {
-      showStatusBanner: this.props.showStatusBanner ?? true,
-      showContactDetails: this.props.showContactDetails ?? true,
-      vedtekterOpen: this.state.vedtekterOpen,
-      vedtekterArrowStyle: this.state.vedtekterOpen ? "transform:rotate(90deg);" : "",
-      vedtekterAccepted: accepted,
-      showAcceptHint: this.state.showAcceptHint,
-      joinButtonStyle: accepted ? "" : "opacity:0.55;",
-      toggleVedtekter: () => this.setState(s => ({ vedtekterOpen: !s.vedtekterOpen })),
-      toggleAccepted: () => this.setState(s => ({ vedtekterAccepted: !s.vedtekterAccepted, showAcceptHint: false })),
-      onJoinClick: (e) => {
-        if (!this.state.vedtekterAccepted) {
-          e.preventDefault();
-          this.setState({ vedtekterOpen: true, showAcceptHint: true });
-        }
-      },
-    };
+
+  function onJoinClick(e) {
+    var checkbox = document.getElementById("vedtekter-checkbox");
+    if (!checkbox.checked) {
+      e.preventDefault();
+      document.getElementById("vedtekter-content").style.display = "block";
+      document.getElementById("vedtekter-arrow").style.transform = "rotate(90deg)";
+      document.getElementById("accept-hint").style.display = "block";
+    }
   }
-}
 </script>
 </body>
 </html>
